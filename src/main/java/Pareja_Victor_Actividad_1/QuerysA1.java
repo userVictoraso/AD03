@@ -144,9 +144,17 @@ public class QuerysA1 {
 
             Query queryAllDepartamento = session.createQuery("from Departamento");
             List<Departamento> listaDepartamentos = queryAllDepartamento.list();
+            int[] numeroEmpleados = new int[1000];
+            Query queryAllEmpleado = session.createQuery("from Empleado ");
+            List<Empleado> listaEmpleados = queryAllEmpleado.list();
 
-            for (Departamento departamento : listaDepartamentos) {
-                System.out.println("DEPARTMENT [" + departamento.getNombre() + "]");
+            for (int i = 0; i < listaDepartamentos.size(); i++) {
+                for (int j = 0; j < listaEmpleados.size(); j++) {
+                    if(listaDepartamentos.get(i).getId() == listaEmpleados.get(j).getDepartamento().getId()) {
+                        numeroEmpleados[i]++;
+                    }
+                }
+                System.out.println("DEPARTMENT [" + listaDepartamentos.get(i).getNombre() + ", numEmpleados = " + numeroEmpleados[i]  + "]");
             }
             transaction.commit();
         } catch (Exception e) {
