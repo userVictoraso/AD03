@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PROYECTOS")
-public class Proyecto {
+public class Proyecto{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +57,7 @@ public class Proyecto {
         return "Proyecto{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", departamento=" + departamento +
+                ", id_departamento=" + departamento.getId() +
                 '}';
     }
 

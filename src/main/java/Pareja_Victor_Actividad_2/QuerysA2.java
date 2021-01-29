@@ -17,7 +17,7 @@ public class QuerysA2 {
     static Transaction transaction = null;
 
     public static void main(String[] args) {
-        activityFour();
+        activityFive();
     }
     /*Inserta un nuevo objeto Empleados en la BD (identificador:A28, de nombre Pepe Blanco, fecha de ingreso 'la
     fecha actual', salario 2000, jefe 'A11' y en el departamento '01'.*/
@@ -137,15 +137,17 @@ public class QuerysA2 {
             Query queryallDepartamentos = session.createQuery("from Departamento");
             List<Departamento> listaDepartamentos = queryallDepartamentos.list();
             //CARGAR TODOS LOS PROYECTOS
-            Query queryallProyectos = session.createQuery("from Proyecto");
+            Query queryallProyectos = session.createQuery("from Proyecto ");
             List<Proyecto> listaProyectos = queryallProyectos.list();
             //IMPRIMIR LA INFO
             for (Departamento departamento : listaDepartamentos) {
                 for(Proyecto proyecto : listaProyectos){
                     if (departamento.getId() == proyecto.getDepartamento().getId()){
-                        System.out.println("DEPARTAMENTO [" + departamento.toString() + proyecto.toString() + "]");
-                    } else {
+                        System.out.println("DEPARTAMENTO [" + departamento.toString() + "//" + proyecto.toString() + "]");
+                        break;
+                    } else if(departamento.getId() != proyecto.getDepartamento().getId()){
                         System.out.println("DEPARTAMENTO [" + departamento.toString() + "]");
+                        break;
                     }
                 }
             }
