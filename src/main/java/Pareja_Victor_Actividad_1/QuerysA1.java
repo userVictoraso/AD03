@@ -7,14 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuerysA1 {
     static Session session;
     static Transaction transaction;
 
-    public static void main(String[] args) { activitySix();
-    }
+    static int empleadosPorDepardamento;
+
+    static Map<String, Integer> departamentosNoOrdenados = new HashMap<String, Integer>();
+    static Map<String, Integer> departamentosOrdenados = null;
+
     //Apellido, nombre, salario y número de empleado con un salario inferior al mileurista.
     public static void activityOne() {
         session = null;
@@ -144,18 +149,28 @@ public class QuerysA1 {
 
             Query queryAllDepartamento = session.createQuery("from Departamento");
             List<Departamento> listaDepartamentos = queryAllDepartamento.list();
-            int[] numeroEmpleados = new int[1000];
+
             Query queryAllEmpleado = session.createQuery("from Empleado ");
             List<Empleado> listaEmpleados = queryAllEmpleado.list();
 
-            for (int i = 0; i < listaDepartamentos.size(); i++) {
-                for (int j = 0; j < listaEmpleados.size(); j++) {
-                    if(listaDepartamentos.get(i).getId() == listaEmpleados.get(j).getDepartamento().getId()) {
-                        numeroEmpleados[i]++;
+            for (Departamento d : listaDepartamentos) {
+                empleadosPorDepardamento = 0;
+                for (Empleado e : listaEmpleados) {
+                    if(d.getId() == e.getDepartamento().getId()) {
+                        empleadosPorDepardamento++;
                     }
                 }
-                System.out.println("DEPARTMENT [" + listaDepartamentos.get(i).getNombre() + ", numEmpleados = " + numeroEmpleados[i]  + "]");
+                if (empleadosPorDepardamento > 1){
+                    departamentosNoOrdenados.put(d.getNombre(), empleadosPorDepardamento);
+                }
             }
+            System.out.println("Unsort Map......");
+            SortMap.printMap(departamentosNoOrdenados);
+
+            System.out.println("\nSorted Map......By Value");
+            departamentosOrdenados = SortMap.sortByValue(departamentosNoOrdenados);
+            SortMap.printMap(departamentosOrdenados);
+
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
