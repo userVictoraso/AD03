@@ -164,10 +164,10 @@ public class QuerysA1 {
                     departamentosNoOrdenados.put(d.getNombre(), empleadosPorDepardamento);
                 }
             }
-            System.out.println("Unsort Map......");
+            System.out.println("[NO ORDENADO]");
             SortMap.printMap(departamentosNoOrdenados);
 
-            System.out.println("\nSorted Map......By Value");
+            System.out.println("\n[ORDENADO DE MENOR A MAYOR NºTRABAJADORES]");
             departamentosOrdenados = SortMap.sortByValue(departamentosNoOrdenados);
             SortMap.printMap(departamentosOrdenados);
 

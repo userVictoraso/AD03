@@ -16,9 +16,6 @@ public class QuerysA2 {
     static Session session = null;
     static Transaction transaction = null;
 
-    public static void main(String[] args) {
-        activityFive();
-    }
     /*Inserta un nuevo objeto Empleados en la BD (identificador:A28, de nombre Pepe Blanco, fecha de ingreso 'la
     fecha actual', salario 2000, jefe 'A11' y en el departamento '01'.*/
     public static void activityOne(){
@@ -62,7 +59,7 @@ public class QuerysA2 {
             List<Empleado> listaEmpleados = queryAllEmpleados.list();
             //ENCONTRAR EL DEPARTAMENTO EN EL QUE QUEREMOS INGRESAR EL EMPLEADO
             for (Empleado empleado : listaEmpleados) {
-                if(empleado.getId() == 30){
+                if(empleado.getId() == 1){
                     //UNA VEZ ENCONTRADO EL EMPLEADO
                     empleado.setSalario(2200F);
                     session.save(empleado);
