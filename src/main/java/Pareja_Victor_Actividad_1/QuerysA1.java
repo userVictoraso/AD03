@@ -20,7 +20,10 @@ public class QuerysA1 {
     static Map<String, Integer> departamentosNoOrdenados = new HashMap<String, Integer>();
     static Map<String, Integer> departamentosOrdenados = null;
 
-    //Apellido, nombre, salario y número de empleado con un salario inferior al mileurista.
+    public static void main(String[] args) {
+        activitySix();
+    }
+    //Apellido, nombre, salario y número de empleado con un salario inferior al 100000.
     public static void activityOne() {
         session = null;
         transaction = null;
@@ -28,7 +31,7 @@ public class QuerysA1 {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-            Query queryAll = session.createQuery("from Empleado where salario < 1000");
+            Query queryAll = session.createQuery("from Empleado where salario < 100000");
             List<Empleado> everyEmployeer = queryAll.list();
             for (Empleado employeer : everyEmployeer) {
                 System.out.println("EMPLOYEER [" + employeer.getApellidos() + "," + employeer.getNombre() + ", " +
@@ -93,7 +96,7 @@ public class QuerysA1 {
         }
         HibernateUtil.shutdown();
     }
-    //Apellido, salario y número de departamento de los empleados cuyo salario sea  mayor que el máximo salario del departamento 30.
+    //Apellido, salario y número de departamento de los empleados cuyo salario sea  mayor que el máximo salario del departamento 2.
     public static void activityFour() {
         session = null;
         transaction = null;
@@ -101,7 +104,7 @@ public class QuerysA1 {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-            Query queryAll = session.createQuery("from Empleado where salario > (SELECT MAX(salario) from Empleado e where e.departamento.id = 30)");
+            Query queryAll = session.createQuery("from Empleado where salario > (SELECT MAX(salario) from Empleado e where e.departamento.id = 2)");
             List<Empleado> everyEmployeer = queryAll.list();
             for (Empleado employeer : everyEmployeer) {
                 System.out.println("EMPLOYEER [" + employeer.getApellidos() + ", " + employeer.getSalario() + ", " + employeer.getDepartamento() + "]");
@@ -116,7 +119,7 @@ public class QuerysA1 {
         }
         HibernateUtil.shutdown();
     }
-    //Empleados con salario menor que alguno de los empleados  del departamento 30.
+    //Empleados con salario menor que alguno de los empleados  del departamento 2.
     public static void activityFive() {
         session = null;
         transaction = null;
@@ -124,7 +127,7 @@ public class QuerysA1 {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
 
-            Query queryAll = session.createQuery("from Empleado where salario < (SELECT MIN(salario) from Empleado e where e.departamento.id = 30)");
+            Query queryAll = session.createQuery("from Empleado where salario < (SELECT MIN(salario) from Empleado e where e.departamento.id = 2)");
             List<Empleado> everyEmployeer = queryAll.list();
             for (Empleado employeer : everyEmployeer) {
                 System.out.println("EMPLOYEER [" + employeer.toString() + "]");

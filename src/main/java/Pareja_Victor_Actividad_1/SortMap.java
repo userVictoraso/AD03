@@ -7,7 +7,7 @@ public class SortMap {
     public static <K, V> void printMap(Map<K, V> map) {
         for (Map.Entry<K, V> entry : map.entrySet()) {
             System.out.println("DEPARTAMENTO [NOMBRE: " + entry.getKey()
-                    + "// NºTRABAJADORES: " + entry.getValue());
+                    + " -  NºTRABAJADORES: " + entry.getValue());
         }
     }
     //ORDENAR MAP

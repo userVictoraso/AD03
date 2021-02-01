@@ -16,8 +16,8 @@ public class QuerysA2 {
     static Session session = null;
     static Transaction transaction = null;
 
-    /*Inserta un nuevo objeto Empleados en la BD (identificador:A28, de nombre Pepe Blanco, fecha de ingreso 'la
-    fecha actual', salario 2000, jefe 'A11' y en el departamento '01'.*/
+    /*Inserta un nuevo objeto Empleados en la BD (identificador:autoincrement, de nombre VICTOR, fecha de ingreso 'la
+    fecha actual', salario 77.000, comision '25' y en el departamento '01'.*/
     public static void activityOne(){
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -31,9 +31,9 @@ public class QuerysA2 {
             List<Departamento> listaDepartamentos = queryAllDepartamento.list();
             //ENCONTRAR EL DEPARTAMENTO EN EL QUE QUEREMOS INGRESAR EL EMPLEADO
             for (Departamento departamento : listaDepartamentos) {
-                if(departamento.getId() == 1){
+                if(departamento.getId() == 2){
                     //UNA VEZ ENCONTRADO EL DPTO, INSTANCIAMOS EL NUEVO EMPLEADO CON EL DEPARTAMENTO ASIGNADO
-                    Empleado empleado = new Empleado("PEPE", "BLANCO", "PROGRAMADOR", fechaActual, 2000.0F, 84.0F, departamento);
+                    Empleado empleado = new Empleado("VICTOR", "RAMIREZ", "PROGRAMADOR", fechaActual, 77000.0F, 25.0F, departamento);
                     session.save(empleado);
                 }
             }
@@ -59,7 +59,7 @@ public class QuerysA2 {
             List<Empleado> listaEmpleados = queryAllEmpleados.list();
             //ENCONTRAR EL DEPARTAMENTO EN EL QUE QUEREMOS INGRESAR EL EMPLEADO
             for (Empleado empleado : listaEmpleados) {
-                if(empleado.getId() == 1){
+                if(empleado.getId() == 2){
                     //UNA VEZ ENCONTRADO EL EMPLEADO
                     empleado.setSalario(2200F);
                     session.save(empleado);
@@ -83,7 +83,7 @@ public class QuerysA2 {
             transaction = session.beginTransaction();
 
             //CARGAR TODOS LOS EMPLEADOS
-            Query queryAllEmpleados = session.createQuery("delete from Empleado e where e.id = 29");
+            Query queryAllEmpleados = session.createQuery("delete from Empleado e where e.id = 2");
             System.out.println(queryAllEmpleados.executeUpdate() + " modificacione/s en las tablas.");
             transaction.commit();
         } catch (Exception e) {
